@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Girl of Faith — Rejoins-nous</title>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #4A6FD4;
+    --blue-light: #7B9FE8;
+    --blue-bright: #A8C0F0;
+    --dark: #0D1637;
+    --dark2: #12204D;
+    --cream: #F0F4FF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body { font-family: 'Jost', sans-serif; background: var(--cream); min-height: 100vh; }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: var(--dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 20%, rgba(74,111,212,0.22) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 80%, rgba(123,159,232,0.15) 0%, transparent 50%);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--blue), var(--blue-light), var(--blue), transparent);
+  }
+
+  .crown-wrap {
+    position: relative; z-index: 1;
+    margin-bottom: 28px;
+    animation: float 3.5s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .hero h2 {
+    font-family: 'Jost', sans-serif; font-weight: 300;
+    font-size: clamp(0.8rem, 2vw, 0.95rem);
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.35em; text-transform: uppercase;
+    margin-bottom: 8px; position: relative; z-index: 1;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    color: var(--blue-light);
+    line-height: 1.1; letter-spacing: 0.04em;
+    margin-bottom: 10px; position: relative; z-index: 1;
+  }
+
+  .hero-tagline {
+    font-size: clamp(0.72rem, 1.8vw, 0.85rem);
+    color: var(--blue-light); letter-spacing: 0.28em;
+    text-transform: uppercase; margin-bottom: 36px;
+    position: relative; z-index: 1; opacity: 0.8;
+  }
+
+  .divider {
+    width: 100px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--blue-light), transparent);
+    margin: 0 auto 36px; position: relative; z-index: 1;
+  }
+
+  .hero-verse {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: rgba(255,255,255,0.65);
+    max-width: 560px; line-height: 1.8;
+    margin-bottom: 50px; position: relative; z-index: 1;
+  }
+
+  .hero-verse span {
+    display: block; font-size: 0.78rem;
+    font-family: 'Jost', sans-serif; font-style: normal;
+    color: var(--blue-light); letter-spacing: 0.2em; margin-top: 10px; opacity: 0.8;
+  }
+
+  .scroll-btn {
+    background: transparent; border: 1px solid var(--blue);
+    color: var(--blue-light); padding: 14px 40px;
+    font-family: 'Jost', sans-serif; font-size: 0.82rem;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    cursor: pointer; transition: all 0.3s; position: relative; z-index: 1;
+  }
+
+  .scroll-btn:hover { background: var(--blue); color: white; }
+
+  /* ===== PRESENTATION ===== */
+  .message-section { background: white; padding: 80px 20px; }
+
+  .container { max-width: 760px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.72rem; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--blue); font-weight: 600; margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+
+  .section-label::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, var(--blue-light), transparent);
+  }
+
+  .message-box {
+    background: var(--cream); border-left: 3px solid var(--blue);
+    padding: 36px 40px; font-size: 1rem; line-height: 2;
+    color: var(--dark2); white-space: pre-line;
+  }
+
+  .message-box strong { color: var(--dark); font-weight: 600; }
+
+  /* ===== FORM SECTION ===== */
+  .form-section {
+    background: var(--dark); padding: 80px 20px; position: relative;
+  }
+
+  .form-section::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 80% 10%, rgba(74,111,212,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 20% 90%, rgba(123,159,232,0.1) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .form-section .section-label { color: var(--blue-light); }
+  .form-section .section-label::after { background: linear-gradient(90deg, rgba(123,159,232,0.5), transparent); }
+
+  h3.form-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    color: white; margin-bottom: 10px;
+  }
+
+  .form-subtitle {
+    color: rgba(255,255,255,0.4); font-size: 0.9rem;
+    margin-bottom: 44px; line-height: 1.7;
+  }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; position: relative; z-index: 1; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-group.full { grid-column: 1 / -1; }
+
+  label {
+    font-size: 0.72rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--blue-light); font-weight: 500;
+  }
+
+  input, select, textarea {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(74,111,212,0.35);
+    color: white; padding: 14px 16px;
+    font-family: 'Jost', sans-serif; font-size: 0.95rem;
+    transition: all 0.3s; outline: none; width: 100%;
+  }
+
+  input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.22); }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--blue-light); background: rgba(74,111,212,0.1);
+  }
+
+  select option { background: var(--dark); color: white; }
+  textarea { resize: vertical; min-height: 100px; }
+
+  .checkbox-group { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; }
+  .checkbox-item { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; }
+  .checkbox-item input[type="checkbox"] { width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px; accent-color: var(--blue-light); }
+  .checkbox-item span { font-size: 0.9rem; color: rgba(255,255,255,0.62); line-height: 1.5; }
+
+  .photo-box {
+    background: rgba(74,111,212,0.08); border: 1px solid rgba(74,111,212,0.3);
+    padding: 18px 20px; color: rgba(255,255,255,0.55); font-size: 0.9rem; line-height: 1.8;
+  }
+
+  .submit-area { margin-top: 40px; text-align: center; position: relative; z-index: 1; }
+
+  .submit-note { font-size: 0.82rem; color: rgba(255,255,255,0.32); margin-bottom: 24px; line-height: 1.7; }
+  .submit-note strong { color: var(--blue-light); }
+
+  .submit-btn {
+    background: var(--blue); color: white; border: none;
+    padding: 16px 60px; font-family: 'Jost', sans-serif;
+    font-size: 0.88rem; font-weight: 600; letter-spacing: 0.22em;
+    text-transform: uppercase; cursor: pointer; transition: all 0.3s;
+  }
+
+  .submit-btn:hover {
+    background: var(--blue-light); color: var(--dark);
+    transform: translateY(-2px); box-shadow: 0 8px 24px rgba(74,111,212,0.4);
+  }
+
+  .success-msg {
+    display: none;
+    background: rgba(74,111,212,0.12); border: 1px solid var(--blue);
+    color: var(--blue-bright); padding: 28px; text-align: center;
+    margin-top: 32px; font-size: 1rem; line-height: 1.8; position: relative; z-index: 1;
+  }
+
+  footer {
+    background: #080F2A; text-align: center; padding: 36px 20px;
+    color: rgba(255,255,255,0.22); font-size: 0.8rem; letter-spacing: 0.12em;
+    border-top: 1px solid rgba(74,111,212,0.2);
+  }
+
+  footer span { color: var(--blue-light); }
+
+  @media (max-width: 600px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .form-group.full { grid-column: 1; }
+    .message-box { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="crown-wrap">
+    <svg width="140" height="115" viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+          <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <linearGradient id="cg" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#7B9FE8"/>
+          <stop offset="50%" style="stop-color:#A8C0F0"/>
+          <stop offset="100%" style="stop-color:#4A6FD4"/>
+        </linearGradient>
+      </defs>
+      <path d="M18 125 L38 55 L72 95 L100 22 L128 95 L162 55 L182 125 Z"
+            fill="none" stroke="url(#cg)" stroke-width="2.5" stroke-linejoin="round" filter="url(#glow)"/>
+      <rect x="15" y="125" width="170" height="12" rx="2" fill="none" stroke="url(#cg)" stroke-width="2" filter="url(#glow)"/>
+      <line x1="100" y1="7" x2="100" y2="30" stroke="#A8C0F0" stroke-width="2.5" stroke-linecap="round" filter="url(#glow)"/>
+      <line x1="89" y1="16" x2="111" y2="16" stroke="#A8C0F0" stroke-width="2.5" stroke-linecap="round" filter="url(#glow)"/>
+      <polygon points="100,52 114,70 100,88 86,70" fill="rgba(74,111,212,0.2)" stroke="#A8C0F0" stroke-width="1.8" filter="url(#glow)"/>
+      <polygon points="100,61 108,70 100,79 92,70" fill="rgba(168,192,240,0.3)" stroke="#A8C0F0" stroke-width="1"/>
+      <circle cx="38" cy="55" r="5" fill="#1A2A6C" stroke="#A8C0F0" stroke-width="1.5" filter="url(#glow)"/>
+      <circle cx="162" cy="55" r="5" fill="#1A2A6C" stroke="#A8C0F0" stroke-width="1.5" filter="url(#glow)"/>
+      <circle cx="100" cy="22" r="5" fill="#1A2A6C" stroke="#A8C0F0" stroke-width="1.5" filter="url(#glow)"/>
+      <circle cx="50" cy="131" r="3" fill="#7B9FE8" opacity="0.7"/>
+      <circle cx="100" cy="131" r="3.5" fill="#A8C0F0"/>
+      <circle cx="150" cy="131" r="3" fill="#7B9FE8" opacity="0.7"/>
+      <line x1="18" y1="116" x2="65" y2="116" stroke="rgba(123,159,232,0.35)" stroke-width="1"/>
+      <line x1="135" y1="116" x2="182" y2="116" stroke="rgba(123,159,232,0.35)" stroke-width="1"/>
+    </svg>
+  </div>
+
+  <h2>Bienvenue dans</h2>
+  <h1>Girl of Faith</h1>
+  <p class="hero-tagline">Femme de foi &nbsp;·&nbsp; Femme d'impact</p>
+  <div class="divider"></div>
+  <p class="hero-verse">
+    "Enracinées dans la foi, marchant dans l'excellence, impactant notre génération."
+    <span>— Devise GOF</span>
+  </p>
+  <button class="scroll-btn" onclick="document.getElementById('presentation').scrollIntoView({behavior:'smooth'})">Découvrir le mouvement ↓</button>
+</section>
+
+<!-- PRÉSENTATION -->
+<section class="message-section" id="presentation">
+  <div class="container">
+    <p class="section-label">À propos</p>
+    <div class="message-box">🌟 <strong>Qui sommes-nous ?</strong>
+GOF, c'est un cercle de sœurs qui prient ensemble, se parlent librement, s'encouragent et apprennent à marcher avec Dieu. On croit que chaque femme porte une force et un impact unique lorsqu'elle connaît Dieu.
+
+📌 <strong>Ce qu'on fait ensemble :</strong>
+→ Temps "cœur ouvert" pour partager sans jugement
+→ Évangélisation et impact autour de nous
+→ Lectures chrétiennes et partages
+→ Retraites spirituelles et moments de jeûne
+→ Visites sociales et moments conviviaux
+→ Et bien plus encore...
+
+💙 <strong>Pour rejoindre le groupe :</strong>
+1. Remplis le formulaire d'inscription ci-dessous
+2. Envoie-nous la capture d'écran de ta soumission
+3. Tu seras ajoutée à notre groupe WhatsApp
+
+Nous t'attendons avec amour 🤍
+<strong>La coordination de Girl of Faith</strong></div>
+  </div>
+</section>
+
+<!-- FORMULAIRE -->
+<section class="form-section" id="formulaire">
+  <div class="container">
+    <p class="section-label">Formulaire d'inscription</p>
+    <h3 class="form-title">Rejoins Girl of Faith</h3>
+    <p class="form-subtitle">Remplis ce formulaire, puis envoie une capture d'écran à la coordinatrice pour être ajoutée au groupe.</p>
+
+    <div class="form-grid" id="gofForm">
+
+      <div class="form-group">
+        <label for="prenom">Prénom *</label>
+        <input type="text" id="prenom" placeholder="Ton prénom" required>
+      </div>
+
+      <div class="form-group">
+        <label for="nom">Nom *</label>
+        <input type="text" id="nom" placeholder="Ton nom de famille" required>
+      </div>
+
+      <div class="form-group">
+        <label for="tel">Téléphone / WhatsApp *</label>
+        <input type="tel" id="tel" placeholder="+228 00 00 00 00" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="ton@email.com">
+      </div>
+
+      <div class="form-group">
+        <label for="ville">Ville *</label>
+        <input type="text" id="ville" placeholder="Ta ville" required>
+      </div>
+
+      <div class="form-group">
+        <label for="age">Tranche d'âge *</label>
+        <select id="age" required>
+          <option value="" disabled selected>Sélectionne...</option>
+          <option>13 – 17 ans</option>
+          <option>18 – 22 ans</option>
+          <option>23 – 27 ans</option>
+          <option>28 ans et plus</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="profession">Profession / Études *</label>
+        <input type="text" id="profession" placeholder="Ex: Étudiante, Infirmière..." required>
+      </div>
+
+      <div class="form-group">
+        <label for="anniversaire">Date d'anniversaire *</label>
+        <input type="date" id="anniversaire" required>
+      </div>
+
+      <div class="form-group full">
+        <label for="eglise">Ton église / communauté (optionnel)</label>
+        <input type="text" id="eglise" placeholder="Nom de ton église ou groupe chrétien">
+      </div>
+
+      <div class="form-group full">
+        <label>Ta photo de profil</label>
+        <div class="photo-box">
+          📸 Envoie une belle photo de toi directement sur WhatsApp au <strong style="color:#A8C0F0;">+228 93697065</strong> en même temps que ta capture d'écran de confirmation 😊
+        </div>
+      </div>
+
+      <div class="form-group full">
+        <label>Ce qui t'attire dans GOF *</label>
+        <div class="checkbox-group">
+          <label class="checkbox-item"><input type="checkbox" value="foi"> <span>Grandir dans ma relation avec Dieu</span></label>
+          <label class="checkbox-item"><input type="checkbox" value="sororite"> <span>Trouver une communauté de sœurs bienveillantes</span></label>
+          <label class="checkbox-item"><input type="checkbox" value="impact"> <span>Avoir un impact autour de moi</span></label>
+          <label class="checkbox-item"><input type="checkbox" value="identite"> <span>Comprendre mon identité en Christ</span></label>
+          <label class="checkbox-item"><input type="checkbox" value="croissance"> <span>Me développer personnellement et spirituellement</span></label>
+        </div>
+      </div>
+
+      <div class="form-group full">
+        <label for="motivation">Pourquoi veux-tu rejoindre GOF ? *</label>
+        <textarea id="motivation" placeholder="Dis-nous quelques mots sur toi et ce que tu attends du groupe..." required></textarea>
+      </div>
+
+      <div class="form-group full">
+        <label>Je m'engage à... *</label>
+        <div class="checkbox-group">
+          <label class="checkbox-item"><input type="checkbox" id="eng1" required> <span>Respecter les valeurs de Girl of Faith</span></label>
+          <label class="checkbox-item"><input type="checkbox" id="eng2"> <span>Participer activement aux activités du groupe</span></label>
+          <label class="checkbox-item"><input type="checkbox" id="eng3"> <span>Encourager et soutenir mes sœurs</span></label>
+          <label class="checkbox-item"><input type="checkbox" id="eng4"> <span>Représenter les valeurs chrétiennes dans ma vie quotidienne</span></label>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="submit-area">
+      <p class="submit-note">
+        Après avoir soumis ce formulaire, fais une <strong>capture d'écran</strong> de la page de confirmation et envoie-la à la coordinatrice GOF sur WhatsApp pour être ajoutée au groupe.
+      </p>
+      <button class="submit-btn" onclick="submitForm()">Soumettre ma demande ✨</button>
+    </div>
+
+    <div class="success-msg" id="successMsg">
+      🎉 <strong>Ta demande a bien été soumise !</strong><br><br>
+      Fais maintenant une <strong>capture d'écran</strong> de cette page et envoie-la à la coordinatrice GOF sur WhatsApp.<br>
+      Tu seras ajoutée au groupe très bientôt. Bienvenue dans la famille 🤍👑
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Girl of Faith</span> — "Enracinées dans la foi, marchant dans l'excellence, impactant notre génération."
+</footer>
+
+<script>
+  const EMAILJS_PUBLIC_KEY  = "mqBVWaF1uAv9jpjnq";
+  const EMAILJS_SERVICE_ID  = "service_5xnauzn";
+  const EMAILJS_TEMPLATE_ID = "template_lkhcs9i";
+
+  emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY, blockHeadless: false });
+
+function submitForm() {
+  const required = ['prenom', 'nom', 'tel', 'ville', 'age', 'motivation', 'profession', 'anniversaire'];
+  let valid = true;
+
+  required.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el.value.trim()) {
+      el.style.borderColor = '#C0392B';
+      valid = false;
+    } else {
+      el.style.borderColor = 'rgba(74,111,212,0.35)';
+    }
+  });
+
+  if (!document.getElementById('eng1').checked) {
+    alert("Tu dois accepter les valeurs de Girl of Faith pour rejoindre le groupe.");
+    return;
+  }
+
+  if (!valid) {
+    alert("Merci de remplir tous les champs obligatoires (*).");
+    return;
+  }
+
+  const motivations = [];
+  document.querySelectorAll('.checkbox-group input[type="checkbox"][value]').forEach(cb => {
+    if (cb.checked) motivations.push(cb.closest('.checkbox-item').querySelector('span').textContent);
+  });
+
+  const engagements = [];
+  ['eng1','eng2','eng3','eng4'].forEach(id => {
+    const cb = document.getElementById(id);
+    if (cb && cb.checked) engagements.push(cb.closest('.checkbox-item').querySelector('span').textContent);
+  });
+
+  const templateParams = {
+    prenom:       document.getElementById('prenom').value,
+    nom:          document.getElementById('nom').value,
+    tel:          document.getElementById('tel').value,
+    email:        document.getElementById('email').value || 'Non renseigné',
+    ville:        document.getElementById('ville').value,
+    age:          document.getElementById('age').value,
+    eglise:       document.getElementById('eglise').value || 'Non renseigné',
+    profession:   document.getElementById('profession').value,
+    anniversaire: document.getElementById('anniversaire').value,
+    motivations:  motivations.join(', ') || 'Non précisé',
+    motivation:   document.getElementById('motivation').value,
+    engagements:  engagements.join(' | '),
+    to_email:     'victoireyamoure@gmail.com'
+  };
+
+  const btn = document.querySelector('.submit-btn');
+  btn.textContent = 'Envoi en cours...';
+  btn.disabled = true;
+
+  emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+    .then(() => {
+      document.getElementById('successMsg').style.display = 'block';
+      document.getElementById('successMsg').scrollIntoView({ behavior: 'smooth' });
+      required.forEach(id => document.getElementById(id).value = '');
+      document.getElementById('email').value = '';
+      document.getElementById('eglise').value = '';
+      document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+      btn.textContent = 'Soumettre ma demande ✨';
+      btn.disabled = false;
+    })
+    .catch(() => {
+      document.getElementById('successMsg').style.display = 'block';
+      document.getElementById('successMsg').scrollIntoView({ behavior: 'smooth' });
+      btn.textContent = 'Soumettre ma demande ✨';
+      btn.disabled = false;
+    });
+}
+</script>
+
+</body>
+</html>
